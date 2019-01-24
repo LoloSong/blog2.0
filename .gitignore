@@ -1,3 +1,5 @@
 node_modules
 ssl
 runtime
+lolosong-com.conf
+nginx.conf

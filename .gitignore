@@ -4,3 +4,6 @@ runtime
 lolosong-com.conf
 nginx.conf
 https.sh
+auto_build.sh
+.installed
+firekylin.sql

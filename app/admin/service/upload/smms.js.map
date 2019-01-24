@@ -1,0 +1,46 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/admin/service/upload/smms.js"
+    ],
+    "names": [
+        "uploadMethod",
+        "filename",
+        "config",
+        "form",
+        "buffer",
+        "require",
+        "readFileSync",
+        "append",
+        "split",
+        "length",
+        "contentType",
+        "reject",
+        "resolve",
+        "request",
+        "method",
+        "hostname",
+        "path",
+        "headers",
+        "getHeaders",
+        "res",
+        "all",
+        "on",
+        "chunk",
+        "JSON",
+        "parse",
+        "code",
+        "data",
+        "url",
+        "e",
+        "pipe",
+        "run",
+        "file",
+        "upload"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AACA;;;;;;;;;;;;;;AAGE;mBACMA,Y;yGAAaC,Q,EAAUC,M;;;;;;AACvBC,kB,GAAO,wB;AACPC,oB,GAASC,QAAQ,IAAR,EAAcC,YAAd,CAA2BL,QAA3B,C;;AACbE,mBAAKI,MAAL,CAAY,QAAZ,EAAsBH,MAAtB,EAA8B,sBAAc;AAC1CH,0BAAUA,SAASO,KAAT,CAAe,GAAf,EAAoBP,SAASO,KAAT,CAAe,GAAf,EAAoBC,MAApB,GAA6B,CAAjD,CADgC;AAE1CC,6BAAa;AAF6B,eAAd,CAA9B;;oBAKIN,OAAOK,MAAP,IAAiB,OAAO,IAAP,GAAc,C;;;;;+CAE1B,kBAAQE,MAAR,CAAeT,MAAf,C;;;+CAGF,sBAAY,UAACU,OAAD,EAAUD,MAAV,EAAqB;AACtC,oBAAIE,UAAU,gBAAMA,OAAN,CAAc;AAC1BC,0BAAQ,MADkB;AAE1BC,4BAAU,OAFgB;AAG1BC,wBAAM,aAHoB;AAI1BC,2BAAS,sBAAc,EAAd,EAAkBd,KAAKe,UAAL,EAAlB,EAAqC;AAC5C,kCAAc;AAD8B,mBAArC;AAJiB,iBAAd,EAOX,UAACC,GAAD,EAAS;AACV,sBAAIC,MAAM,EAAV;AACAD,sBAAIE,EAAJ,CAAO,MAAP,EAAe;AAAA,2BAASD,OAAOE,KAAhB;AAAA,mBAAf;AACAH,sBAAIE,EAAJ,CAAO,KAAP,EAAc,YAAM;AAClB,wBAAI;AACFD,4BAAMG,KAAKC,KAAL,CAAWJ,GAAX,CAAN;AACAR,8BAAQQ,IAAIK,IAAJ,KAAa,SAAb,IAA0BL,IAAIM,IAAJ,CAASC,GAA3C;AACD,qBAHD,CAGE,OAAOC,CAAP,EAAU;AACVjB,6BAAO,KAAP;AACD;AACF,mBAPD;AAQD,iBAlBa,EAkBXU,EAlBW,CAkBR,OAlBQ,EAkBC;AAAA,yBAAMV,OAAO,KAAP,CAAN;AAAA,iBAlBD,CAAd;AAmBAR,qBAAK0B,IAAL,CAAUhB,OAAV;AACD,eArBM,C;;;;;;;;;;;;;;;;;AAwBT;;;mBACMiB,G;2GAAIC,I,EAAM7B,M;;;;;;qBACD,KAAK8B,MAAL,CAAYD,IAAZ,EAAkB7B,MAAlB,C",
+    "file": "../../../../src/admin/service/upload/smms.js",
+    "sourcesContent": [
+        "import https from 'https';\nimport FormData from 'form-data';\nimport Base from './base';\n\nexport default class extends Base {\n  // 导入方法\n  async uploadMethod(filename, config) {\n    var form = new FormData();\n    var buffer = require('fs').readFileSync(filename);\n    form.append('smfile', buffer, Object.assign({\n      filename: filename.split('/')[filename.split('/').length - 1],\n      contentType: 'image/png'\n    }));\n\n    if (buffer.length >= 1024 * 1024 * 5) {\n      // config 暂时没用,出错时抛出\n      return Promise.reject(config);\n    }\n\n    return new Promise((resolve, reject) => {\n      var request = https.request({\n        method: 'POST',\n        hostname: 'sm.ms',\n        path: '/api/upload',\n        headers: Object.assign({}, form.getHeaders(), {\n          'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) Chrome/47.0.2526.111 Safari/537.36',\n        })\n      }, (res) => {\n        var all = '';\n        res.on('data', chunk => all += chunk)\n        res.on('end', () => {\n          try {\n            all = JSON.parse(all);\n            resolve(all.code === 'success' && all.data.url);\n          } catch (e) {\n            reject(false);\n          }\n        })\n      }).on('error', () => reject(false));\n      form.pipe(request);\n    });\n  }\n\n  // 执行方法\n  async run(file, config) {\n    return await this.upload(file, config);\n  }\n}\n\n"
+    ]
+}

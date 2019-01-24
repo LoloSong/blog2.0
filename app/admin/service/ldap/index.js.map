@@ -1,0 +1,53 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/admin/service/ldap/index.js"
+    ],
+    "names": [
+        "Ldap",
+        "conf",
+        "config",
+        "url",
+        "ldap_url",
+        "log",
+        "ldap_log",
+        "ldap_connect_timeout",
+        "ldap_baseDn",
+        "Error",
+        "session",
+        "getUserInfo",
+        "username",
+        "client",
+        "createClient",
+        "resolve",
+        "reject",
+        "opts",
+        "filter",
+        "scope",
+        "timeLimit",
+        "search",
+        "err",
+        "res",
+        "on",
+        "user",
+        "entry",
+        "object",
+        "error",
+        "message",
+        "unbind",
+        "e",
+        "result",
+        "status",
+        "dn",
+        "setTimeout",
+        "validate",
+        "password",
+        "ldapCn",
+        "bind"
+    ],
+    "mappings": "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",
+    "file": "../../../../src/admin/service/ldap/index.js",
+    "sourcesContent": [
+        "import ldap from 'ldapjs';\n\nexport default class Ldap {\n  constructor(conf = {}) {\n    // ldap配置\n    // {\n    //  url: 'ldap://x.x.x.x:389',\n    //  ldap_baseDn: 'dc=ldap,dc=example,dc=com'\n    // }\n    this.config = {\n      ...conf,\n      url: conf.ldap_url,\n      log: conf.ldap_log === '1',\n      ldap_connect_timeout: conf.ldap_connect_timeout || 20000\n    };\n\n    if (!this.config.url || !this.config.ldap_baseDn) {\n      throw new Error('ldap config missing!');\n    }\n\n    this.session = {};\n  }\n\n  async getUserInfo(username) {\n    const { url, ldap_baseDn, log, ldap_connect_timeout } = this.config;\n\n    //创建LDAP client，把服务器url传入\n    const client = ldap.createClient({ url, ldap_connect_timeout });\n    this.log(`connecting ${url}`, 'LDAP');\n    this.log(`seasrch: ${username}`, 'LDAP');\n\n    return new Promise((resolve, reject) => {\n      // 创建LDAP查询选项 filter的作用就是相当于SQL的条件\n      const opts = {\n        filter: `(cn=${username})`, // 查询条件过滤器，查找uid=kxh的用户节点\n        scope: 'sub', // 查询范围，sub表示没有深度限制\n        timeLimit: 500 // 查询超时\n      };\n\n      client.search(ldap_baseDn, opts, (err, res) => {\n        //查询结果事件响应\n        res.on('searchENtry', entry => {\n          //获取查询的对象\n          const user = entry.object;\n          this.session = user;\n          resolve(user);\n          this.log(`search result: ${JSON.stringify(user)}`, 'LDAP');\n        });\n\n        //查询错误事件\n        res.on('error', err => {\n          this.error(`error: ${err.message}`, 'LDAP');\n          //unbind操作，必须要做\n          client.unbind(e => this.log(e ? e.message : 'client disconnected', 'LDAP'));\n          reject(err);\n        });\n\n        //查询结束\n        res.on('end', result => {\n          this.log(`search status: ${result.status}`, 'LDAP');\n          // 校验是否有结果\n          if (!this.session.dn) {\n            this.log('result: No such user', 'LDAP');\n          }\n\n          //unbind操作，必须要做\n          client.unbind(e => this.log(e ? e.message : 'client disconnected', 'LDAP'));\n        });\n      });\n\n      setTimeout(() => {\n        this.log('connect timeout', 'LDAP');\n        reject('timeout');\n      }, ldap_connect_timeout);\n    });\n  }\n\n  async validate(username, password) {\n    const { url, ldap_baseDn, log, ldap_connect_timeout } = this.config;\n\n    //创建LDAP client，把服务器url传入\n    const client = ldap.createClient({\n      url,\n      ldap_connect_timeout\n    });\n    this.log(`connecting ${url}`, 'LDAP');\n\n    const ldapCn = `cn=${username},${ldap_baseDn}`;\n    this.log(`ldapCn: ${ldapCn}`, 'LDAP');\n\n    return new Promise((resolve, reject) => {\n      // 将client绑定LDAP Server 第一个参数：是用户，必须是从根节点到用户节点的全路径 第二个参数：用户密码\n      client.bind(ldapCn, password, err => {\n        const result = !err;\n        resolve(result);\n        this.log(result ? '认证成功！' : `认证失败, errmsg: ${JSON.stringify(err)}`, 'LDAP');\n        client.unbind(e => this.log(e ? e.message : 'client disconnected', 'LDAP'));\n      });\n\n      setTimeout(() => {\n        reject('timeout');\n        this.log('connect timeout', 'LDAP');\n      }, ldap_connect_timeout);\n    });\n  }\n\n  log(...args) {\n    if(!this.config.log) {\n      return true;\n    }\n\n    return think.log(...args);\n  }\n\n  error(...args) {\n    if(!this.config.log) {\n      return true;\n    }\n\n    return think.error(...args);\n  }\n}\n"
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/home/logic/post.js"
+    ],
+    "names": [
+        "indexAction",
+        "detailAction",
+        "previewCheck",
+        "pageAction",
+        "isPost",
+        "rules",
+        "preview",
+        "previewData",
+        "validate",
+        "think",
+        "statusAction",
+        "http",
+        "logic",
+        "base"
+    ],
+    "mappings": "AAAA;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAME;;;;mBAIAA,W,0BAAc,CAEb,C;AACD;;;;;;mBAIAC,Y,2BAAe;AACb,SAAKC,YAAL;AACD,G;AACD;;;;;;mBAIAC,U,yBAAa;AACX,SAAKD,YAAL;AACD,G;;mBAEDA,Y,2BAAe;AACb,QAAG,CAAC,KAAKE,MAAL,EAAJ,EAAmB;AACjB,aAAO,IAAP;AACD;;AAED,QAAIC,QAAQ;AACVC,eAAS,aADC;AAEVC,mBAAa;AAFH,KAAZ;;AAKA,QAAG,CAAC,KAAKC,QAAL,CAAcH,KAAd,CAAJ,EAA0B;AACxBI,YAAMC,YAAN,CAAmB,GAAnB,EAAwB,KAAKC,IAA7B;AACD;AACF,G;;;EApC0BF,MAAMG,KAAN,CAAYC,I",
+    "file": "../../../src/home/logic/post.js",
+    "sourcesContent": [
+        "'use strict';\n/**\n * logic\n * @param  {} []\n * @return {}     []\n */\nexport default class extends think.logic.base {\n  /**\n   * index action logic\n   * @return {} []\n   */\n  indexAction() {\n\n  }\n  /**\n   * detail action logic\n   * @return {[type]} [description]\n   */\n  detailAction() {\n    this.previewCheck();\n  }\n  /**\n   * page action logic\n   * @return {[type]} [description]\n   */\n  pageAction() {\n    this.previewCheck();\n  }\n\n  previewCheck() {\n    if(!this.isPost()) {\n      return true;\n    }\n\n    let rules = {\n      preview: 'boolean|get',\n      previewData: 'requiredIf:preview,true'\n    };\n\n    if(!this.validate(rules)) {\n      think.statusAction(400, this.http);\n    }\n  }\n}\n"
+    ]
+}

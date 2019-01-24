@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/admin/service/export/markdown.js"
+    ],
+    "names": [
+        "args",
+        "outputFile",
+        "join",
+        "think",
+        "RUNTIME_PATH",
+        "generate",
+        "posts",
+        "generateZipFile",
+        "post",
+        "zip",
+        "file",
+        "datetime",
+        "create_time",
+        "title",
+        "markdown_content",
+        "run",
+        "getPosts"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;;;;;;AAGE,oBAAqB;AAAA;;AAAA,sCAANA,IAAM;AAANA,UAAM;AAAA;;AAAA,+DACnB,sCAASA,IAAT,EADmB;;AAEnB,UAAKC,UAAL,GAAkB,eAAKC,IAAL,CAAUC,MAAMC,YAAhB,EAA8B,qBAA9B,CAAlB;AAFmB;AAGpB;;mBAEDC,Q,qBAASC,K,EAAO;AACd,WAAO,KAAKC,eAAL,CAAqB,KAAKN,UAA1B,EAAsC,eAAO;AAClD,2BAAiBK,KAAjB,2HAAwB;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;AAAA,YAAfE,IAAe;;AACtBC,YAAIC,IAAJ,MAAYP,MAAMQ,QAAN,CAAeH,KAAKI,WAApB,EAAiC,aAAjC,CAAZ,GAA8DJ,KAAKK,KAAnE,UAA+EL,KAAKM,gBAApF;AACD;AACF,KAJM,CAAP;AAKD,G;;mBAEKC,G;;;;;;;;qBACc,KAAKC,QAAL,E;;;AAAdV,mB;+CACG,KAAKD,QAAL,CAAcC,KAAd,C",
+    "file": "../../../../src/admin/service/export/markdown.js",
+    "sourcesContent": [
+        "import path from 'path';\nimport Base from './base';\n\nexport default class extends Base {\n  constructor(...args) {\n    super(...args);\n    this.outputFile = path.join(think.RUNTIME_PATH, 'export_markdown.zip');\n  }\n\n  generate(posts) {\n    return this.generateZipFile(this.outputFile, zip => {\n      for (let post of posts) {\n        zip.file(`${think.datetime(post.create_time, 'YYYY-MM-DD-')}${post.title}.md`, post.markdown_content);\n      }\n    });\n  }\n\n  async run() {\n    let posts = await this.getPosts();\n    return this.generate(posts);\n  }\n}\n"
+    ]
+}

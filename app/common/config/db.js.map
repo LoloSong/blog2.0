@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/common/config/db.js"
+    ],
+    "names": [
+        "exports",
+        "__esModule",
+        "default"
+    ],
+    "mappings": ";AACM;;AACAA,QAAQC,UAAR,GAAqB,IAArB;AACAD,QAAQE,OAAR,GAAkB;AACpB,YAAQ,OADY;AAEpB,eAAW;AACP,iBAAS;AACL,oBAAQ,WADH;AAEL,oBAAQ,MAFH;AAGL,wBAAY,cAHP;AAIL,oBAAQ,MAJH;AAKL,wBAAY,MALP;AAML,sBAAU,KANL;AAOL,oBAAQ,OAPH;AAQL,wBAAY;AARP;AADF;AAFS,CAAlB",
+    "file": "../../../src/common/config/db.js",
+    "sourcesContent": [
+        "\n      'use strict';\n      exports.__esModule = true;\n      exports.default = {\n    'type': 'mysql',\n    'adapter': {\n        'mysql': {\n            'host': 'localhost',\n            'port': '3306',\n            'database': 'firekylin_17',\n            'user': 'root',\n            'password': 'root',\n            'prefix': 'fk_',\n            'type': 'mysql',\n            'encoding': 'utf8mb4'\n        }\n    }\n}\n\n"
+    ]
+}

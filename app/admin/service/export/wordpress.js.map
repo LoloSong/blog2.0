@@ -1,0 +1,47 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/admin/service/export/wordpress.js"
+    ],
+    "names": [
+        "NOT_SAFE_IN_XML",
+        "args",
+        "outputFile",
+        "join",
+        "think",
+        "RUNTIME_PATH",
+        "run",
+        "importer",
+        "getPosts",
+        "posts",
+        "post",
+        "content",
+        "replace",
+        "summary",
+        "addPost",
+        "id",
+        "title",
+        "date",
+        "datetime",
+        "create_time",
+        "contentEncoded",
+        "excerptEncoded",
+        "categories",
+        "cate",
+        "model",
+        "select",
+        "cateList",
+        "addCategory",
+        "name",
+        "slug",
+        "pathname",
+        "writeFileSync",
+        "stringify",
+        "Error"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,kBAAkB,qEAAxB;;;;;AAEE,oBAAqB;AAAA;;AAAA,sCAANC,IAAM;AAANA,UAAM;AAAA;;AAAA,+DACnB,sCAASA,IAAT,EADmB;;AAEnB,UAAKC,UAAL,GAAkB,eAAKC,IAAL,CAAUC,MAAMC,YAAhB,EAA8B,sBAA9B,CAAlB;AAFmB;AAGpB;;mBACKC,G;;;;;;;;AACAC,sB,GAAW,mB;;qBAEG,KAAKC,QAAL,E;;;AAAdC,mB;0BACYA,K;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAARC,kB;;AACNA,mBAAKC,OAAL,GAAeD,KAAKC,OAAL,CAAaC,OAAb,CAAqBZ,eAArB,EAAsC,EAAtC,CAAf;AACAU,mBAAKG,OAAL,GAAeH,KAAKG,OAAL,CAAaD,OAAb,CAAqBZ,eAArB,EAAsC,EAAtC,CAAf;;AAEAO,uBAASO,OAAT,CAAiB;AACfC,oBAAIL,KAAKK,EADM;AAEfC,uBAAON,KAAKM,KAFG;AAGfC,sBAAMb,MAAMc,QAAN,CAAeR,KAAKS,WAApB,CAHS;AAIfC,gCAAgBV,KAAKC,OAJN;AAKfU,gCAAgBX,KAAKG,OALN;AAMfS,4BAAYZ,KAAKa;AANF,eAAjB;;;;;;;;qBAUmB,KAAKC,KAAL,CAAW,MAAX,EAAmBC,MAAnB,E;;;AAAjBC,sB;2BACYA,Q;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAARH,kB;;AACNhB,uBAASoB,WAAT,CAAqB;AACnBZ,oBAAIQ,KAAKR,EADU;AAEnBC,uBAAOO,KAAKK,IAFO;AAGnBC,sBAAMN,KAAKO;AAHQ,eAArB;;;;;;;;;AAQA,2BAAGC,aAAH,CACE,KAAK7B,UADP,EAEEK,SAASyB,SAAT,EAFF;+CAIO,KAAK9B,U;;;;;oBAEN,IAAI+B,KAAJ,a",
+    "file": "../../../../src/admin/service/export/wordpress.js",
+    "sourcesContent": [
+        "import fs from 'fs';\nimport path from 'path';\nimport Wxr from 'wxr';\nimport Base from './base';\n\nconst NOT_SAFE_IN_XML = /[^\\x09\\x0A\\x0D\\x20-\\xFF\\x85\\xA0-\\uD7FF\\uE000-\\uFDCF\\uFDE0-\\uFFFD]/gm;\nexport default class extends Base {\n  constructor(...args) {\n    super(...args);\n    this.outputFile = path.join(think.RUNTIME_PATH, 'output_wordpress.xml');\n  }\n  async run() {\n    let importer = new Wxr();\n\n    let posts = await this.getPosts();\n    for(let post of posts) {\n      post.content = post.content.replace(NOT_SAFE_IN_XML, '');\n      post.summary = post.summary.replace(NOT_SAFE_IN_XML, '');\n\n      importer.addPost({\n        id: post.id,\n        title: post.title,\n        date: think.datetime(post.create_time),\n        contentEncoded: post.content,\n        excerptEncoded: post.summary,\n        categories: post.cate\n      })\n    }\n\n    let cateList = await this.model('cate').select();\n    for(let cate of cateList) {\n      importer.addCategory({\n        id: cate.id,\n        title: cate.name,\n        slug: cate.pathname\n      });\n    }\n\n    try {\n      fs.writeFileSync(\n        this.outputFile,\n        importer.stringify()\n      )\n      return this.outputFile;\n    } catch (e) {\n      throw new Error(e);\n    }\n  }\n}\n"
+    ]
+}

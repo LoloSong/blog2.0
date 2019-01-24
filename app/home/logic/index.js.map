@@ -1,0 +1,28 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/home/logic/index.js"
+    ],
+    "names": [
+        "indexAction",
+        "installAction",
+        "rules",
+        "step",
+        "isGet",
+        "think",
+        "extend",
+        "db_account",
+        "db_name",
+        "title",
+        "site_url",
+        "username",
+        "password",
+        "logic",
+        "base"
+    ],
+    "mappings": "AAAA;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAME;;;;mBAIAA,W,0BAAc,CAEb,C;AACD;;;;;;mBAIAC,a,4BAAgB;AACd,SAAKC,KAAL,GAAa;AACXC,YAAM;AADK,KAAb;;AAIA,QAAG,CAAC,KAAKC,KAAL,EAAJ,EAAkB;AAChB,WAAKF,KAAL,GAAaG,MAAMC,MAAN,CAAa;AACxBC,oBAAY,mBADY;AAExBC,iBAAS,mBAFe;AAGxBC,eAAO,mBAHiB;AAIxBC,kBAAU,uBAJc;AAKxBC,kBAAU,+BALc;AAMxBC,kBAAU;AANc,OAAb,EAOV,KAAKV,KAPK,CAAb;AAQD;AACF,G;;;EA3B0BG,MAAMQ,KAAN,CAAYC,I",
+    "file": "../../../src/home/logic/index.js",
+    "sourcesContent": [
+        "'use strict';\n/**\n * logic\n * @param  {} []\n * @return {}     []\n */\nexport default class extends think.logic.base {\n  /**\n   * index action logic\n   * @return {} []\n   */\n  indexAction() {\n\n  }\n  /**\n   * install\n   * @return {[type]} [description]\n   */\n  installAction() {\n    this.rules = {\n      step: 'int|default:1'\n    };\n\n    if(!this.isGet()) {\n      this.rules = think.extend({\n        db_account: 'requiredIf:step,1',\n        db_name: 'requiredIf:step,1',\n        title: 'requiredIf:step,2',\n        site_url: 'requiredIf:step,2:url',\n        username: 'requiredIf:step,2|minLength:4',\n        password: 'requiredIf:step,2|minLength:8'\n      }, this.rules);\n    }\n  }\n}\n"
+    ]
+}

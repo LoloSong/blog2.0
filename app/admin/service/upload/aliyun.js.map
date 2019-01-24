@@ -1,0 +1,37 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/admin/service/upload/aliyun.js"
+    ],
+    "names": [
+        "uploadMethod",
+        "filename",
+        "config",
+        "client",
+        "region",
+        "accessKeyId",
+        "accessKeySecret",
+        "bucket",
+        "savePath",
+        "getSavePath",
+        "prefix",
+        "origin",
+        "getAbsOrigin",
+        "resolve",
+        "reject",
+        "put",
+        "result",
+        "compeletePath",
+        "name",
+        "catch",
+        "err",
+        "run",
+        "file",
+        "upload"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;AACA;;;;AACA;;;;AACA;;;;;;;;;;;;;;AAGE;mBACMA,Y;0GAAaC,Q,EAAUC,M;;;;;;AACrBC,oB,GAAS,qBAAQ;AACrBC,wBAAQF,OAAOE,MADM;AAErBC,6BAAaH,OAAOG,WAFC;AAGrBC,iCAAiBJ,OAAOI,eAHH;AAIrBC,wBAAQL,OAAOK;AAJM,eAAR,C;AAMTC,sB,GAAW,KAAKC,WAAL,CAAiBR,QAAjB,EAA2BC,OAAOQ,MAAlC,C;AACXC,oB,GAAS,KAAKC,YAAL,CAAkBV,OAAOS,MAAzB,C;gDACR,sBAAY,UAACE,OAAD,EAAUC,MAAV,EAAqB;AACtC,2EAAG;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,iCACoBX,OAAOY,GAAP,CAAWP,QAAX,EAAqBP,QAArB,CADpB;;AAAA;AACKe,gCADL;AAEKC,uCAFL,GAEwBN,MAFxB,SAEkCK,OAAOE,IAFzC;;AAGDL,kCAAQI,aAAR;;AAHC;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,iBAAH,GAIGE,KAJH,CAIS,UAAUC,GAAV,EAAe;AACtBN,yBAAOM,GAAP;AACD,iBAND;AAOD,eARM,C;;;;;;;;;;;;;;;;;AAWT;;;mBACMC,G;2GAAIC,I,EAAMpB,M;;;;;;qBACD,KAAKqB,MAAL,CAAYD,IAAZ,EAAkBpB,MAAlB,C",
+    "file": "../../../../src/admin/service/upload/aliyun.js",
+    "sourcesContent": [
+        "\nimport co from 'co';\nimport OSS from 'ali-oss';\nimport Base from './base';\n\nexport default class extends Base {\n  // 导入方法\n  async uploadMethod(filename, config) {\n    const client = new OSS({\n      region: config.region,\n      accessKeyId: config.accessKeyId,\n      accessKeySecret: config.accessKeySecret,\n      bucket: config.bucket\n    });\n    const savePath = this.getSavePath(filename, config.prefix);\n    const origin = this.getAbsOrigin(config.origin);\n    return new Promise((resolve, reject) => {\n      co(function* () {\n        const result = yield client.put(savePath, filename);\n        const compeletePath = `${origin}/${result.name}`;\n        resolve(compeletePath);\n      }).catch(function (err) {\n        reject(err);\n      });\n    });\n  }\n\n  // 执行方法\n  async run(file, config) {\n    return await this.upload(file, config);\n  }\n}\n"
+    ]
+}

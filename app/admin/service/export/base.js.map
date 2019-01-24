@@ -1,0 +1,32 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/admin/service/export/base.js"
+    ],
+    "names": [
+        "getPosts",
+        "model",
+        "select",
+        "generateZipFile",
+        "file",
+        "fn",
+        "Function",
+        "zip",
+        "resolve",
+        "reject",
+        "generateNodeStream",
+        "type",
+        "streamFiles",
+        "pipe",
+        "createWriteStream",
+        "on",
+        "think",
+        "service",
+        "base"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;;;;;;;;;;;mBAGQA,Q;;;;;;+CACG,KAAKC,KAAL,CAAW,MAAX,EAAmBC,MAAnB,E;;;;;;;;;;;;;;;;;mBAGTC,e,4BAAgBC,I,EAA2B;AAAA,QAArBC,EAAqB,uEAAhB,IAAIC,QAAJ,EAAgB;;AACzC,QAAIC,MAAM,qBAAV;AACAF,OAAGE,GAAH;;AAEA,WAAO,sBAAY,UAACC,OAAD,EAAUC,MAAV,EAAqB;AACtCF,UACGG,kBADH,CACsB;AAClBC,cAAM,YADY;AAElBC,qBAAa;AAFK,OADtB,EAKGC,IALH,CAKQ,aAAGC,iBAAH,CAAqBV,IAArB,CALR,EAMGW,EANH,CAMM,QANN,EAMgB;AAAA,eAAMP,QAAQJ,IAAR,CAAN;AAAA,OANhB,EAOGW,EAPH,CAOM,OAPN,EAOeN,MAPf;AAQD,KATM,CAAP;AAUD,G;;;EAnB0BO,MAAMC,OAAN,CAAcC,I",
+    "file": "../../../../src/admin/service/export/base.js",
+    "sourcesContent": [
+        "import fs from 'fs';\nimport JSZip from 'jszip';\n\nexport default class extends think.service.base {\n  async getPosts() {\n    return this.model('post').select();\n  }\n\n  generateZipFile(file, fn = new Function()) {\n    let zip = new JSZip();\n    fn(zip);\n\n    return new Promise((resolve, reject) => {\n      zip\n        .generateNodeStream({\n          type: 'nodebuffer',\n          streamFiles: true\n        })\n        .pipe(fs.createWriteStream(file))\n        .on('finish', () => resolve(file))\n        .on('error', reject);\n    });\n  }\n}\n"
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../../src/admin/service/upload/local.js"
+    ],
+    "names": [
+        "renameAsync",
+        "think",
+        "promisify",
+        "rename",
+        "uploadMethod",
+        "file",
+        "name",
+        "ext",
+        "test",
+        "extname",
+        "basename",
+        "replace",
+        "destDir",
+        "formatNow",
+        "destPath",
+        "join",
+        "UPLOAD_PATH",
+        "isDir",
+        "mkdir",
+        "filepath",
+        "resolve",
+        "UPLOAD_BASE_URL",
+        "RESOURCE_PATH",
+        "Error",
+        "run",
+        "config"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;;AACA;;;;AACA;;;;AACA;;;;;;AAEA,IAAMA,cAAcC,MAAMC,SAAN,CAAgB,aAAGC,MAAnB,eAApB;;;;;;;;;;mBAEQC,Y;yGAAaC,I;UAAOC,I,SAAAA,I;;;;;;AACpBC,iB,GAAM,UAAUC,IAAV,CAAe,eAAKC,OAAL,CAAaJ,IAAb,CAAf,IAAqC,eAAKI,OAAL,CAAaJ,IAAb,CAArC,GAA0D,M;AAChEK,sB,GAAW,CAACJ,QAAQ,eAAKI,QAAL,CAAcL,IAAd,EAAoBE,GAApB,CAAT,IAAqCA,G;AACpD;;AACAG,yBAAWA,SAASC,OAAT,CAAiB,SAAjB,EAA4B,EAA5B,CAAX;;AAEIC,qB,GAAU,KAAKC,SAAL,E;AACVC,sB,GAAW,eAAKC,IAAL,CAAUd,MAAMe,WAAhB,EAA6BJ,OAA7B,C;;AACf,kBAAG,CAACX,MAAMgB,KAAN,CAAYH,QAAZ,CAAJ,EAA2B;AACzBb,sBAAMiB,KAAN,CAAYJ,QAAZ;AACD;;;;AAGC;AACIK,sB,GAAW,eAAKJ,IAAL,CAAUD,QAAV,EAAoBJ,QAApB,C;;qBACTV,YAAYK,IAAZ,EAAkBc,QAAlB,C;;;+CACC,cAAIC,OAAJ,CAAYnB,MAAMoB,eAAlB,EAAmCF,SAASR,OAAT,CAAiBV,MAAMqB,aAAvB,EAAsC,EAAtC,CAAnC,C;;;;;oBAEDC,MAAM,wBAAN,C;;;;;;;;;;;;;;;;;mBAIJC,G;2GAAInB,I,EAAMoB,M;;;;;;qBACD,KAAKrB,YAAL,CAAkBC,IAAlB,EAAwBoB,MAAxB,C",
+    "file": "../../../../src/admin/service/upload/local.js",
+    "sourcesContent": [
+        "import fs from 'fs';\nimport url from 'url';\nimport path from 'path';\nimport Base from './base';\n\nconst renameAsync = think.promisify(fs.rename, fs);\nexport default class extends Base {\n  async uploadMethod(file, {name}) {\n    let ext = /^\\.\\w+$/.test(path.extname(file)) ? path.extname(file) : '.png';\n    let basename = (name || path.basename(file, ext)) + ext;\n    //过滤 ../../\n    basename = basename.replace(/[\\\\\\/]/g, '');\n\n    let destDir = this.formatNow();\n    let destPath = path.join(think.UPLOAD_PATH, destDir);\n    if(!think.isDir(destPath)) {\n      think.mkdir(destPath);\n    }\n\n    try {\n      // 上传文件路径\n      let filepath = path.join(destPath, basename);\n      await renameAsync(file, filepath);\n      return url.resolve(think.UPLOAD_BASE_URL, filepath.replace(think.RESOURCE_PATH, ''));\n    } catch(e) {\n      throw Error('FILE_UPLOAD_MOVE_ERROR');\n    }\n  }\n\n  async run(file, config) {\n    return await this.uploadMethod(file, config);\n  }\n}\n"
+    ]
+}

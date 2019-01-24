@@ -1,0 +1,51 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/common/service/marked-with-mathjax.js"
+    ],
+    "names": [
+        "content",
+        "config",
+        "MathJax",
+        "start",
+        "typeset",
+        "math",
+        "format",
+        "svg",
+        "data",
+        "resolve",
+        "_renderMathJax",
+        "text",
+        "reg",
+        "cap",
+        "lastIndex",
+        "exec",
+        "strStart",
+        "index",
+        "strEnd",
+        "length",
+        "mathContent",
+        "substring",
+        "_mathSpanRender",
+        "mathLexer",
+        "Lexer",
+        "tokens",
+        "lex",
+        "i",
+        "item",
+        "type",
+        "lang",
+        "j",
+        "k",
+        "header",
+        "cells",
+        "Parser",
+        "parse",
+        "render"
+    ],
+    "mappings": "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",
+    "file": "../../../src/common/service/marked-with-mathjax.js",
+    "sourcesContent": [
+        "import mathJax from 'mathjax-node';\nimport marked from 'marked';\n\n/**\n * 渲染具体的 MathJax 表达式\n *\n * @param content\n * @returns {Promise.<*>}\n */\nasync function _renderMathJax(content) {\n  mathJax.config({\n    MathJax: {}\n  });\n  mathJax.start();\n\n  return await new Promise(resolve => {\n    mathJax.typeset({\n      math: content,\n      format: 'TeX',\n      svg: true,\n    }, function (data) {\n      resolve(data.svg);\n    });\n  });\n}\n\n\n/**\n * 渲染行内数学表达式\n * @param text\n * @returns {Promise.<*>}\n */\nasync function _mathSpanRender(text) {\n  const reg = /`\\$(.*?)\\$`/g;\n  let cap;\n\n  reg.lastIndex = 0;\n\n  while (text) {\n    cap = reg.exec(text);\n    if (cap) {\n      const strStart = cap.index;\n      const strEnd = cap.index + cap[0].length;\n      const mathContent = await _renderMathJax(cap[1]);\n\n      text = text.substring(0, strStart) + mathContent + text.substring(strEnd);\n      reg.lastIndex += mathContent.length - cap[0].length;\n    } else {\n      break;\n    }\n  }\n\n  return text;\n}\n\n\n/**\n * 渲染 Markdown 文本\n *\n * @param content\n * @returns {Promise.<void>}\n */\nexport default async function render(content) {\n  var mathLexer = new marked.Lexer();\n  var tokens = mathLexer.lex(content);\n\n  for (let i = 0; i < tokens.length; i++) {\n    const item = tokens[i];\n\n    // 处理块级表达式\n    if (item.type === 'code' && item.lang === 'math') {\n      tokens[i] = {\n        type: 'paragraph',\n        text: await _renderMathJax(item.text),\n      }\n    }\n\n    // 处理表格\n    if (item.type === 'table') {\n      // 处理表头\n      let j, k\n      for (j = 0; j < item.header.length; j++) {\n        item.header[j] = await _mathSpanRender(item.header[j])\n      }\n      // 处理单元格\n      for (j = 0; j < item.cells.length; j++) {\n        for (k = 0; k < item.cells[j].length; k++) {\n          item.cells[j][k] = await _mathSpanRender(item.cells[j][k])\n        }\n      }\n    }\n\n    // 处理行内表达式\n    if (item.text) {\n      item.text = await _mathSpanRender(item.text);\n    }\n  }\n\n  return marked.Parser.parse(tokens);\n}\n"
+    ]
+}
